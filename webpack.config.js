@@ -46,6 +46,10 @@ function webpackConfig(env = {}) {
     scrivitoOrigin = process.env.URL;
   } else if (process.env.DEPLOY_PRIME_URL) {
     scrivitoOrigin = process.env.DEPLOY_PRIME_URL;
+  } else if (process.env.AWS_BRANCH) {
+    scrivitoOrigin = `https://${urlify(process.env.AWS_BRANCH)}.${
+        process.env.AWS_APP_ID
+    }.amplifyapp.com`;
   }
 
   return {
@@ -125,7 +129,8 @@ function webpackConfig(env = {}) {
       symlinks: false,
     },
     devServer: {
-      port: 8080,
+      port: 8082,
+      disableHostCheck: true,
       stats: "minimal",
       historyApiFallback: {
         rewrites: [
