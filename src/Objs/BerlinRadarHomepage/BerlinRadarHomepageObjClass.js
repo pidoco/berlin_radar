@@ -2,7 +2,7 @@ import * as Scrivito from "scrivito";
 import defaultPageAttributes from "../_defaultPageAttributes";
 import metadataAttributes from "../_metadataAttributes";
 
-const Homepage = Scrivito.provideObjClass("Homepage", {
+const BerlinRadarHomepage = Scrivito.provideObjClass("BerlinRadarHomepage", {
   attributes: {
     ...defaultPageAttributes,
     showAsLandingPage: ["enum", { values: ["yes", "no"] }],
@@ -22,4 +22,4 @@ const Homepage = Scrivito.provideObjClass("Homepage", {
   extractTextAttributes: ["navigationSection", "body"],
 });
 
-export default Homepage;
+export default BerlinRadarHomepage;

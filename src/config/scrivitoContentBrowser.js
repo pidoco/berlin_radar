@@ -107,6 +107,7 @@ const FILTER_PRESENTATIONS = {
   Download: { title: "Downloads", icon: "pdf" },
   Event: { title: "Events", icon: "cal" },
   Homepage: { title: "Homepage", icon: "inbox" },
+  BerlinRadarHomepage: { title: "BerlinRadarHomepage", icon: "inbox" },
   Image: { title: "Images", icon: "image" },
   Job: { title: "Jobs", icon: "suitcase" },
   LandingPage: { title: "Landing pages", icon: "inbox" },
@@ -125,6 +126,7 @@ const PAGES = [
   "Job",
   "Redirect",
   "Homepage",
+  "BerlinRadarHomepage",
   "Blog",
   "SearchResults",
 ];

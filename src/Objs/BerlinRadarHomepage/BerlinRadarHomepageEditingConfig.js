@@ -13,10 +13,9 @@ import {
   metadataValidations,
 } from "../_metadataEditingConfig";
 
-Scrivito.provideEditingConfig("Homepage", {
-  title: "Homepage",
+Scrivito.provideEditingConfig("BerlinRadarHomepage", {
+  title: "BerlinRadarHomepage",
   thumbnail: homepageObjIcon,
-  hideInSelectionDialogs: true,
   attributes: {
     ...defaultPageEditingConfigAttributes,
     ...metadataEditingConfigAttributes,
