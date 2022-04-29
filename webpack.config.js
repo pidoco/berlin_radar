@@ -12,6 +12,7 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
 const Webpackbar = require("webpackbar");
 const ZipPlugin = require("zip-webpack-plugin");
+const Urlify = require("urlify");
 const headersCsp = require("./public/_headersCsp.json");
 
 // load ".env"
