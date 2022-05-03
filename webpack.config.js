@@ -18,6 +18,13 @@ const headersCsp = require("./public/_headersCsp.json");
 // load ".env"
 dotenv.config();
 
+const urlify = Urlify.create({
+  spaces: "-",
+  nonPrintable: "-",
+  toLower: true,
+  trim: true,
+});
+
 // Extend headersCsp with custom endpoint URL
 const endpoint = process.env.SCRIVITO_ENDPOINT;
 if (endpoint) {
@@ -52,6 +59,15 @@ function webpackConfig(env = {}) {
         process.env.AWS_APP_ID
     }.amplifyapp.com`;
   }
+
+  const scrivitoPort = process.env.SCRIVITO_PORT || 3000;
+  if (!scrivitoOrigin) {
+    scrivitoOrigin = `localhost:${scrivitoPort}`;
+  }
+  const afsOrigin = process.env.AFS_ORIGIN || `localhost:${scrivitoPort}`;
+  const berlinRadarOrigin =
+      process.env.BERLIN_RADAR_ORIGIN || `localhost:${scrivitoPort}`;
+
 
   return {
     mode: isProduction ? "production" : "development",
@@ -123,14 +139,14 @@ function webpackConfig(env = {}) {
 
       path: path.join(__dirname, buildPath),
     },
-    plugins: generatePlugins({ isProduction, isPrerendering, scrivitoOrigin }),
+    plugins: generatePlugins({ isProduction, isPrerendering, scrivitoOrigin, afsOrigin, berlinRadarOrigin, scrivitoPort }),
     resolve: {
       extensions: [".js"],
       modules: ["node_modules"],
       symlinks: false,
     },
     devServer: {
-      port: 8082,
+      port: scrivitoPort,
       disableHostCheck: true,
       stats: "minimal",
       historyApiFallback: {
@@ -160,14 +176,19 @@ function generateEntry({ isPrerendering }) {
   return entry;
 }
 
-function generatePlugins({ isProduction, isPrerendering, scrivitoOrigin }) {
+function generatePlugins({ isProduction, isPrerendering, scrivitoOrigin, afsOrigin, berlinRadarOrigin, scrivitoPort }) {
   const ignorePublicFiles = ["_headersCsp.json"];
 
   const plugins = [
     new webpack.EnvironmentPlugin({
       NODE_ENV: isProduction ? "production" : "development",
-      SCRIVITO_TENANT: "",
       SCRIVITO_ORIGIN: scrivitoOrigin,
+      AFS_SITE_ID: process.env.AFS_SITE_ID,
+      AFS_ORIGIN: afsOrigin,
+      BERLIN_RADAR_SITE_ID: process.env.BERLIN_RADAR_SITE_ID,
+      BERLIN_RADAR_ORIGIN: berlinRadarOrigin,
+      SCRIVITO_PORT: scrivitoPort,
+      SCRIVITO_TENANT: "",
     }),
     new Webpackbar(),
     new CopyWebpackPlugin([
