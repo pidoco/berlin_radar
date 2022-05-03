@@ -186,7 +186,7 @@ function generatePlugins({ isProduction, isPrerendering, scrivitoOrigin, afsOrig
       AFS_SITE_ID: process.env.AFS_SITE_ID,
       AFS_ORIGIN: afsOrigin,
       BERLIN_RADAR_SITE_ID: process.env.BERLIN_RADAR_SITE_ID,
-      BERLIN_RADAR_ORIGIN: berlinRadarOrigin,
+      BERLIN_RADAR_ORIGIN: berlinRadarOrigin || scrivitoOrigin,
       SCRIVITO_PORT: scrivitoPort,
       SCRIVITO_TENANT: "",
     }),
