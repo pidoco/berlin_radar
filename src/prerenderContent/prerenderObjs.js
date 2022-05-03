@@ -45,6 +45,7 @@ export default async function prerenderObjs(
 function allObjs(objClassesBlacklist) {
   return Scrivito.Obj.all()
     .andNot("_objClass", "equals", objClassesBlacklist)
+    .and("_siteId", "equals", process.env.BERLIN_RADAR_SITE_ID)
     .take();
 }
 
