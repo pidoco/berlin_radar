@@ -1,6 +1,6 @@
 {
   "base-uri": "'none'",
-  "default-src": ["'self'", "data:", "https:", "wss:"],
+  "default-src": ["'self'", "data:", "https:", "wss:", "http:"],
   "style-src": ["'self'", "data:", "https:", "wss:", "'unsafe-inline'"],
   "script-src": [
     "'self'",

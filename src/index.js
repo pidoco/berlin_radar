@@ -1,12 +1,14 @@
 import "./polyfills";
 import * as React from "react";
-import * as ReactDOM from "react-dom";
+import * as ReactDOM from "react-dom/client";
 import * as Scrivito from "scrivito";
 import "./Objs";
 import "./Widgets";
 import App from "./App";
 import "./config";
+import client from "./api/client";
 import "./assets/stylesheets/index.scss";
+import { ApolloProvider } from "@apollo/client";
 
 if (window.preloadDump) {
   Scrivito.preload(window.preloadDump).then(({ dumpLoaded }) => {
@@ -21,7 +23,12 @@ if (window.preloadDump) {
 }
 
 function renderApp() {
-  ReactDOM.render(<App />, document.getElementById("application"));
+  const root = ReactDOM.createRoot(document.getElementById("application"));
+  root.render(
+    <ApolloProvider client={client}>
+      <App />
+    </ApolloProvider>
+  );
 }
 
 function hydrateApp() {
